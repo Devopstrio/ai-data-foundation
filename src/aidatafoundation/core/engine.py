@@ -29,7 +29,7 @@ class DataFoundationEngine:
         
         vectors_to_insert = []
         for i, emb in enumerate(embeddings):
-            chunk_meta: Dict[str, Any] = dict(metadata)
+            chunk_meta: dict[str, Any] = dict(metadata)
             chunk_meta["source_id"] = source_id
             chunk_meta["chunk_index"] = i
             
