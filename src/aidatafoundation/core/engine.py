@@ -27,12 +27,15 @@ class DataFoundationEngine:
         chunks = self._chunk_text(content)
         embeddings = self._generate_embeddings(chunks)
         
-        # Prepare vectors for DB
         vectors_to_insert = []
         for i, emb in enumerate(embeddings):
+            chunk_meta: Dict[str, Any] = dict(metadata)
+            chunk_meta["source_id"] = source_id
+            chunk_meta["chunk_index"] = i
+            
             vectors_to_insert.append({
                 "embedding": emb,
-                "metadata": {**metadata, "source_id": source_id, "chunk_index": i},
+                "metadata": chunk_meta,
                 "content": chunks[i]
             })
             
